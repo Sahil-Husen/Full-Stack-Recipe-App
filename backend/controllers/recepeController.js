@@ -1,27 +1,30 @@
 import mongoose from "mongoose";
-import Recepe from "../models/recepeSchema.js";
+import Recepe from "../models/RecepeSchema.js";
+import { Profiler } from "react";
 
 export const addRecepe = async (req, res) => {
   const { name, description, properties } = req.body;
   try {
     const newRecepe = await Recepe.create({
-      name: name,
-      description: description,
-      properties: properties,
+      name,
+      description,
+      properties,
     });
-    await newRecepe.save();
-    res.status(201).json({
+     
+    return res.status(201).json({
+      
       message: "Recepe added successfully",
+      newRecepe
     });
   } catch (error) {
-    console.log("Error in Adding Recepe in DB", error);
+    console.log('error',error);
   }
 };
 
 export const getRecepes = async (req, res) => {
   try {
-    const recipes = await Recepe.find();
-    res.status(200).json(recipes);
+    const Recepes = await Recepe.find();
+    res.status(200).json(Recepes);
   } catch (error) {
     res.status(500).json({ message: "Server Error", error: error.message });
   }
@@ -32,16 +35,41 @@ export const getRecepe = async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
-        error: "invalid recipe ID",
+        error: "invalid Recepe ID",
       });
     }
 
-    const recipe = await Recepe.findById(id);
-    if (!recipe) {
-      return res.status(404).json({ error: "Recipe Not Found" });
+    const Recepe = await Recepe.findById(id);
+    if (!Recepe) {
+      return res.status(404).json({ error: "Recepe Not Found" });
     }
-    res.status(200).json({message:'success',recipe});
+    res.status(200).json({ message: "success", Recepe });
   } catch (error) {
-    console.log("Error in getting recipe", error);
+    console.log("Error in getting Recepe", error);
+  }
+};
+
+// Edit the Recepes
+
+export const editRecepe = async (req, res) => {
+  const { name, description, properties } = req.body;
+  const { id } = req.params;
+  try {
+    const updatedRecepe = await Recepe.findByIdAndUpdate(
+      id,
+      {
+        ...(name && { name }),
+        ...(description && { description }),
+        ...(properties && { properties }),
+      },
+      { new: true }
+    );
+    if (!updatedRecepe) {
+      return res.status(404).json({ message: "Recepe not found" });
+    }
+    res.status(201).json({ message: "Recepe Edited", updatedRecepe });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log("Error in Editing the Recepe", error);
   }
 };

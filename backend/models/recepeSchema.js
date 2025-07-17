@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const recepeSchema = mongoose.Schema(
+const RecepeSchema = mongoose.Schema(
   {
     id: mongoose.Schema.ObjectId,
     name: {
@@ -20,5 +20,5 @@ const recepeSchema = mongoose.Schema(
   { timeStamp: true }
 );
 
-const Recepe = mongoose.model("Recepe", recepeSchema);
+const Recepe = mongoose.model("Recepe", RecepeSchema);
 export default Recepe;

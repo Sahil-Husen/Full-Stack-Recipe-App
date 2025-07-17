@@ -7,15 +7,12 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import User from "./models/userSchema.js";
-import recepeRoutes from './routes/recepeRoutes.js'
+import RecepeRoutes from './routes/RecepeRoutes.js'
 
-// const SECRET = process.env.JWT_SECRET;
-// console.log("secret :",SECRET);
-
-// Load environment variables from .env file
+ 
 dotenv.config();
 
-// Initialize express app
+ 
 const app = express();
 
 // Middleware
@@ -29,7 +26,7 @@ connectDB();
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/recepe",recepeRoutes)
+app.use("/api/Recepe",RecepeRoutes)
 
 // Default route
 app.get("/", (req, res) => {

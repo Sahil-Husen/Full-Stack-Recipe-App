@@ -1,9 +1,12 @@
 import express from "express";
-import {addRecepe,getRecepes,getRecepe} from '../controllers/recepeController.js'
+import {addRecepe,getRecepes,getRecepe,editRecepe} from '../controllers/RecepeController.js'
+import authMiddleware from '../middleware/authMiddleware.js'
 
 const router = express.Router();
 
-router.post("/addRecepe", addRecepe);
-router.get("/getRecepes", getRecepes);
-router.get("/getRecepe/:id", getRecepe);
+router.post("/addRecepe",authMiddleware, addRecepe);
+router.get("/getRecepes",authMiddleware, getRecepes);
+router.get("/getRecepe/:id",authMiddleware, getRecepe);
+router.put('/:id/edit-Recepe',authMiddleware,editRecepe);
+
  export default  router;
