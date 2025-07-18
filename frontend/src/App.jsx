@@ -1,36 +1,16 @@
-import React, { useState } from "react";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import Footer from "./components/Footer";
-import PopUp from "./components/PopUp";
-function App() {
-  const [pop, setPopUp] = useState(false);
-  const handlePopUp = () => {
-    setPopUp(!pop);
-    console.log("show pop up", pop);
-  };
- 
-  const popStyle= {
-    position:'absolute',
-    display:'flex',
-    backgroundColor:'black',
-    color:'white',
-  }
+import React from 'react'
+import Navbar from './components/Navbar'
+import Home from './components/Home'
+import Footer from './components/Footer'
 
+function App() {
   return (
-    <>
-      {pop ? (
-        <PopUp popStyle={popStyle} />
-      ) : (
-        <>
-          {" "}
-          <Header handlePopUp={handlePopUp}></Header>
-          <Home></Home>
-          <Footer></Footer>{" "}
-        </>
-      )}
-    </>
-  );
+    <div className=' bg-gray-700 w-full h-full flex flex-col'>
+    <Navbar></Navbar>
+    <Home></Home>
+    <Footer></Footer>
+    </div>
+  )
 }
 
-export default App;
+export default App
