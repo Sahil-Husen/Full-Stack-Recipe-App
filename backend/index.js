@@ -16,7 +16,10 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors()); // optional: for cross-origin requests
+app.use(cors({
+  origin: "http://localhost:5173", // 👈 your frontend origin
+  credentials: true, // 👈 allow credentials (cookies, headers)
+})); 
 app.use(cookieParser());
 app.use(express.json()); // built-in body parser for JSON
 app.use(express.urlencoded({ extended: true })); // built-in parser for form data
@@ -26,7 +29,7 @@ connectDB();
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/Recepe",RecepeRoutes)
+app.use("/api/recepe",RecepeRoutes)
 
 // Default route
 app.get("/", (req, res) => {

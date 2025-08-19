@@ -40,26 +40,31 @@ export const signUp = async (req, res) => {
 
  //login
 
-export const login = async (req, res) => {  
+export const login = async (req, res) => {
+  // console.log("request body : ",req.body);
   const { email, password } = req.body;
 
   try {
+    // Validate request
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
+
+    // Find user
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({
-        message: "Invalid User",
-      });
+      return res.status(401).json({ message: "Invalid user" });
     }
 
+    // Validate password
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
-      return res.status(401).json({
-        message: "Invalid Credentials",
-      });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
+    // Generate token
     const token = jwt.sign(
       { id: user._id, email: user.email },
       process.env.JWT_SECRET,
@@ -69,12 +74,12 @@ export const login = async (req, res) => {
     // Set token in cookie
     res.cookie("jwt", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // use true only in production
+      secure: process.env.NODE_ENV === "production", // set true in prod
       sameSite: "Strict",
       maxAge: 30 * 60 * 1000, // 30 minutes
     });
 
-    return res.status(201).json({ message: "Login successful",token});
+    return res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error("Error in login:", error);
     return res.status(500).json({ message: "Internal Server Error" });

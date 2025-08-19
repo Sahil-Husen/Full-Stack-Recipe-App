@@ -17,7 +17,7 @@ const RecepeSchema = mongoose.Schema(
     },
     image: String,
   },
-  { timeStamp: true }
+  { timestamps: true }
 );
 
 const Recepe = mongoose.model("Recepe", RecepeSchema);

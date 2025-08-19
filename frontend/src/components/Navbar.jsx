@@ -1,15 +1,21 @@
 import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import logo from "../assets/logo.jpg"
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <nav className=" fixed w-full bg-white shadow dark:bg-gray-800">
       <div className="container px-6 py-3 mx-auto md:flex">
         <div className="flex items-center justify-between">
-          <a href="#">
-            <img className="w-auto h-6 sm:h-7" src="" alt="Logo" />
-          </a>
+        
+            <NavLink to="/">
+            <img className="w-auto h-9 rounded-full  sm:h-7  " src={logo} alt="Logo" />
+           </NavLink>
+          
 
           {/* Mobile menu button */}
           <div className="flex lg:hidden">
@@ -63,24 +69,24 @@ function Navbar() {
           }`}
         >
           <div className="flex flex-col px-2 -mx-4 md:flex-row md:mx-10 md:py-0">
-            <a
-              href="#"
+            <NavLink
+              to="/"
               className="px-2.5 py-2  text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2"
             >
               Home
-            </a>
-            <a
-              href="#"
+            </NavLink>
+            <NavLink
+              to="/about"
               className="px-2.5 py-2  text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2"
             >
               About
-            </a>
-            <a
-              href="#"
+            </NavLink>
+            <NavLink
+              to="/contact"
               className="px-2.5 py-2  text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2"
             >
               Contact
-            </a>
+            </NavLink>
           </div>
 
           <div className="relative mt-4 md:mt-0 flex items-center gap-4">
@@ -108,8 +114,11 @@ function Navbar() {
             </div>
 
             {/* 🔐 Modern Login Button */}
-            <button className="px-5 py-2 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-200">
-              Login
+            <button
+              onClick={() => navigate("Signup")}
+              className="px-5 py-2 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-200"
+            >
+              SignUp
             </button>
           </div>
         </div>
