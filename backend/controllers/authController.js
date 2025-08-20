@@ -38,7 +38,7 @@ export const signUp = async (req, res) => {
   }
 };
 
- //login
+//login
 
 export const login = async (req, res) => {
   // console.log("request body : ",req.body);
@@ -47,7 +47,9 @@ export const login = async (req, res) => {
   try {
     // Validate request
     if (!email || !password) {
-      return res.status(400).json({ message: "Email and password are required" });
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
     }
 
     // Find user
@@ -79,10 +81,20 @@ export const login = async (req, res) => {
       maxAge: 30 * 60 * 1000, // 30 minutes
     });
 
-    return res.status(200).json({ message: "Login successful", token });
+    // Assuming you have a `User` model and `user` is fetched after successful login
+
+    return res.status(200).json({
+      message: "Login successful",
+      token, // your generated JWT
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name, // optional
+        // Add more fields if needed
+      },
+    });
   } catch (error) {
     console.error("Error in login:", error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-

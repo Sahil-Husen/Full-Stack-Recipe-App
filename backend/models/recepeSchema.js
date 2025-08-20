@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const RecepeSchema = mongoose.Schema(
+const RecepeSchema = new mongoose.Schema(
   {
     id: mongoose.Schema.ObjectId,
     name: {
@@ -14,11 +14,14 @@ const RecepeSchema = mongoose.Schema(
     },
     properties: {
       type: String,
+      required: true, // recently added
     },
     image: String,
   },
   { timestamps: true }
 );
 
-const Recepe = mongoose.model("Recepe", RecepeSchema);
+// ✅ Prevent OverwriteModelError
+const Recepe = mongoose.models.Recepe || mongoose.model("Recepe", RecepeSchema);
+
 export default Recepe;

@@ -6,17 +6,18 @@ import { CgProfile } from "react-icons/cg";
 import { BiDish } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import RecipeDash from "./RecipeDash";
-import {NavLink} from 'react-router-dom'
+import { NavLink,useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [isHandle, setHandle] = useState(false);
   const [isRecipe, setRecipe] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleBar = () => {
     setHandle((prev) => !prev);
   };
 
- 
   return (
     <div className="w-screen h-screen bg-cyan-900 text-white flex">
       {/* Sidebar */}
@@ -47,16 +48,12 @@ function Dashboard() {
         <div className="w-full flex flex-col items-center gap-5">
           <div className="flex items-center gap-3 w-full px-4 py-2 hover:bg-cyan-800 rounded cursor-pointer transition-all">
             <GoHome size={24} />
-            {isHandle && <span>Home</span>}
+            {isHandle && <span onClick={()=>navigate("/")}>Home</span>}
           </div>
 
           <div className="flex items-center gap-3 w-full px-4 py-2 hover:bg-cyan-800 rounded cursor-pointer transition-all">
             <BiDish size={24} />
-            {isHandle && (
-              
-              <NavLink to="/recipeDash" >  Recipes</NavLink>
-              
-            )}
+            {isHandle && <NavLink to="/recipeDash"> Recipes</NavLink>}
           </div>
 
           <div className="flex items-center gap-3 w-full px-4 py-2 hover:bg-cyan-800 rounded cursor-pointer transition-all">

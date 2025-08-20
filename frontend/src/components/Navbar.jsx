@@ -1,21 +1,30 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../assets/logo.jpg"
+import logo from "../assets/logo.jpg";
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
   const navigate = useNavigate();
+
+  const { user, logout } = useAuth();
+  const logoutMessage = () =>{
+    toast.success("Logout Successful");
+    logout()
+  }
 
   return (
     <nav className=" fixed w-full bg-white shadow dark:bg-gray-800">
       <div className="container px-6 py-3 mx-auto md:flex">
         <div className="flex items-center justify-between">
-        
-            <NavLink to="/">
-            <img className="w-auto h-9 rounded-full  sm:h-7  " src={logo} alt="Logo" />
-           </NavLink>
-          
+          <NavLink to="/">
+            <img
+              className="w-auto h-9 rounded-full  sm:h-7  "
+              src={logo}
+              alt="Logo"
+            />
+          </NavLink>
 
           {/* Mobile menu button */}
           <div className="flex lg:hidden">
@@ -114,12 +123,27 @@ function Navbar() {
             </div>
 
             {/* 🔐 Modern Login Button */}
-            <button
-              onClick={() => navigate("Signup")}
-              className="px-5 py-2 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-200"
-            >
-              SignUp
-            </button>
+
+            {user ? (
+              <div className="ml-2 flex gap-5 justify-center items-center">
+                <span className="px-2 py-2 text-white bg-blue-800 rounded hover:bg-blue-500 hover:text-gray-300  transition-all ">
+                  <NavLink to="/dashboard">Dashboard</NavLink>
+                </span>
+                <button
+                  className="bg-blue-800 px-2 py-1   transition-all text-white rounded hover:bg-blue-500 hover:text-gray-300"
+                  onClick={() => logoutMessage()}
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => navigate("login")}
+                className="px-5 py-2 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-200"
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { login } from "../api/auth";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
+  const { loginContext } = useAuth();
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
@@ -18,13 +21,14 @@ function Login() {
 
       toast.success(res?.data?.message || "Login successful");
 
-      // Optional: store token (if using localStorage)
-      localStorage.setItem("authToken", res.data.token);
+      
+      loginContext(res?.data?.user,res?.data?.token)
+      
 
       navigate("/");
     } catch (error) {
       console.error("Login error:", error);
-      toast.error(error?.response?.data?.message || "Login failed");
+      // toast.error(error?.response?.data?.message || "Login failed");
     }
   };
 
@@ -38,7 +42,6 @@ function Login() {
                 Login
               </h1>
 
-              
               <form onSubmit={(e) => handleSubmit(e)} class="mt-12 space-y-6">
                 <div>
                   <label class="text-slate-900 text-sm font-medium mb-2 block">
