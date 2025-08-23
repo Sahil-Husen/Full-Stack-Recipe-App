@@ -33,7 +33,7 @@ function Login() {
   };
 
   return (
-    <div className="p-10 bg-cyan-950">
+    <div className="p-10 bg-cyan-900">
       <div class="bg-cyan-950  p-5 ">
         <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
           <div class="max-w-[480px] w-full">

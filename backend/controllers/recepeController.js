@@ -10,14 +10,13 @@ export const addRecepe = async (req, res) => {
       description,
       properties,
     });
-     
+
     return res.status(201).json({
-      
       message: "Recepe added successfully",
-      newRecepe
+      newRecepe,
     });
   } catch (error) {
-    console.log('error',error);
+    console.log("error", error);
   }
 };
 
@@ -74,4 +73,24 @@ export const editRecepe = async (req, res) => {
   }
 };
 
+export const deleteRecipe = async (req, res) => {
+  const id = req.params.id;
 
+  if (!id) {
+    return res.status(400).json({ message: " Recipe ID is required" });
+  }
+
+  try {
+    const deletedRecipe = await Recepe.findByIdAndDelete(id);
+
+    if (!deletedRecipe) {
+      return res.status(404).json({ message: "Recipe not found" });
+    }
+
+    return res.status(200).json({ message: "Recipe Deleted Successfully" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Error in deleting the Recipe", error: error.message });
+  }
+};

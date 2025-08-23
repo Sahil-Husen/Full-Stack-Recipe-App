@@ -4,40 +4,29 @@ import Signup from "./components/Signup";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Layout from "./components/Layout";
-import Home from "./components/Home"; // actual home content
+import Home from "./components/Home";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-// import Signup from "./components/Signup";
 import RecipeDash from "./components/RecipeDash";
+// import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Routes>
-      {/* 👇 Layout with navbar and footer */}
+      {/* Layout with Navbar/Footer */}
       <Route path="/" element={<Layout />}>
-        {/* 👇 Home component only for "/" */}
         <Route index element={<Home />} />
-        {/* 👇 Nested routes (will show inside <Outlet /> in Layout) */}
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="/signup" element={<Signup />} />
-
-        <Route path="/login" element={<Login/>} />
-
+        <Route path="signup" element={<Signup />} />
+        <Route path="login" element={<Login />} />
       </Route>
+      <Route path="dashboard" element={<Dashboard />}></Route>
+      <Route path="recipeDash" element={<RecipeDash />}></Route>
 
-      
-
-      
+      {/* Fallback */}
       <Route path="*" element={<h1>404 - Page Not Found</h1>} />
-      <Route path="/recipeDash" element={<RecipeDash/>} />
-      <Route path="/dashBoard" element={<Dashboard/>} />
     </Routes>
-    // <div className="h-screen  w-screen">
-    // <Dashboard></Dashboard>
-   
-    // </div>
-    
   );
 }
 

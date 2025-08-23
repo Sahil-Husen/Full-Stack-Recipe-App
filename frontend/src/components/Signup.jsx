@@ -33,8 +33,8 @@ function SignUp() {
   };
 
   return (
-    <div className=" p-10 bg-black ">
-      <div class="bg-gray-700 p-5 mt-10 ">
+    <div className=" p-10 bg-cyan-900 ">
+      <div class="bg-cyan-950 p-5 mt-10 ">
         <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
           <div class="max-w-[480px] w-full">
             <div class="p-6 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-sm">

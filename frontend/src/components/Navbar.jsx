@@ -9,10 +9,10 @@ function Navbar() {
   const navigate = useNavigate();
 
   const { user, logout } = useAuth();
-  const logoutMessage = () =>{
+  const logoutMessage = () => {
     toast.success("Logout Successful");
-    logout()
-  }
+    logout();
+  };
 
   return (
     <nav className=" fixed w-full bg-white shadow dark:bg-gray-800">
@@ -126,11 +126,25 @@ function Navbar() {
 
             {user ? (
               <div className="ml-2 flex gap-5 justify-center items-center">
-                <span className="px-2 py-2 text-white bg-blue-800 rounded hover:bg-blue-500 hover:text-gray-300  transition-all ">
-                  <NavLink to="/dashboard">Dashboard</NavLink>
-                </span>
+                {/* <span className="px-2 py-2 text-white bg-blue-500 rounded hover:bg-blue-500 hover:text-black  transition-all ">
+                 
+                </span> */}
+
+
                 <button
-                  className="bg-blue-800 px-2 py-1   transition-all text-white rounded hover:bg-blue-500 hover:text-gray-300"
+                  class="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
+ border-blue-600
+                       border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+                       active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
+                >
+                  <NavLink to="/dashboard">Dashboard</NavLink>
+                </button>
+
+                <button
+                  class="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
+                   border-blue-600
+                   border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+                   active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
                   onClick={() => logoutMessage()}
                 >
                   Logout

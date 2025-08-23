@@ -28,14 +28,10 @@ app.use(express.urlencoded({ extended: true })); // built-in parser for form dat
 // Connect to database
 connectDB();
 
-
-
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/recepe", RecepeRoutes);
-app.use("/api/recipe",RecipeUploadRoute)
-
-
+app.use("/api/recipe", RecipeUploadRoute);
 
 // Default route
 app.get("/", (req, res) => {
