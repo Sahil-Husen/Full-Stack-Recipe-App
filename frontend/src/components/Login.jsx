@@ -21,9 +21,7 @@ function Login() {
 
       toast.success(res?.data?.message || "Login successful");
 
-      
-      loginContext(res?.data?.user,res?.data?.token)
-      
+      loginContext(res?.data?.user, res?.data?.token);
 
       navigate("/");
     } catch (error) {
