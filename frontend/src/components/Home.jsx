@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 function Home() {
   return (
     <>
-    <Navbar></Navbar>
+      <Navbar></Navbar>
       <div className=" w-full bg-cyan-950 min-h-[500px] h-auto flex flex-col items-center flex-wrap p-2  ">
         {/* Hero Texts  */}
         <div className="flex flex-col gap-10 p-20 ">

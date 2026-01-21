@@ -9,3 +9,7 @@ export const login = async (formData) => {
 export const signup = async (userData) => {
   return axiosInstance.post("/api/auth/signUp", userData);
 };
+
+export const getRecipe = async (recipes)=>{
+  return axiosInstance.get("/api/recepe/getRecepes",recipes);
+}

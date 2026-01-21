@@ -126,9 +126,7 @@ function Navbar() {
 
             {user ? (
               <div className="ml-2 flex gap-5 justify-center items-center">
-                {/* <span className="px-2 py-2 text-white bg-blue-500 rounded hover:bg-blue-500 hover:text-black  transition-all ">
-                 
-                </span> */}
+                
 
 
                 <button

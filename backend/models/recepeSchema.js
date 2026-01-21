@@ -21,7 +21,7 @@ const RecepeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// ✅ Prevent OverwriteModelError
+// Prevent OverwriteModelError
 const Recepe = mongoose.models.Recepe || mongoose.model("Recepe", RecepeSchema);
 
 export default Recepe;

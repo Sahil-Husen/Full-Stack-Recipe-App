@@ -20,6 +20,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
+         <Route path="recipeDash" element={<RecipeDash />}></Route>
       </Route>
 
       <Route
@@ -40,7 +41,7 @@ function App() {
       />
 
       <Route path="dashboard" element={<Dashboard />}></Route>
-      <Route path="recipeDash" element={<RecipeDash />}></Route>
+     
 
       {/* Fallback */}
       <Route path="*" element={<h1>404 - Page Not Found</h1>} />

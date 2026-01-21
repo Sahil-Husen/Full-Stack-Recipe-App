@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom"; // Optional: only if using routing
-
+import Loading from "./Loading";
 function RecipeDash() {
   const url = import.meta.env.VITE_APP_RECIPE_ADD_URL;
 
@@ -11,6 +11,7 @@ function RecipeDash() {
     properties: "",
     image: null,
   });
+  const[loading,setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,11 +19,13 @@ function RecipeDash() {
      
   };
   const handleImageChange = (e) => {
+    
     setFormData({ ...formData, image: e.target.files[0] });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+   
 
     const data = new FormData();
     data.append("name", formData.name);
@@ -31,14 +34,19 @@ function RecipeDash() {
     data.append("image", formData.image);
 
     try {
+       setLoading(true)
       const res = await fetch(url, {
         method: "POST",
         body: data,
       });
 
-      await res.json();
+       await res.json();
+      
+      if(res.status == 200){
+        toast.success("Recipe Added!");
+      }
 
-      toast.success("Recipe Added!");
+      setLoading(false);
 
       // for clearing the previous stored data and cleaning the fields
       setFormData({
@@ -47,8 +55,7 @@ function RecipeDash() {
         properties: "",
         image: null,
       });
-
-      document.getElementById("fileInput").value = "";
+        document.getElementById("file").value = "";    
     } catch (error) {
       console.log("Error in Submitting", error);
     }
@@ -59,7 +66,7 @@ function RecipeDash() {
       {/* Main Content */}
       <main className="flex flex-col items-center px-4 py-12">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-10 mt-10 text-center text-gray-900">
-          Add a New Recipe 🍽️
+        {loading ? (<Loading/>) : "Add a New Recipe 🍽️"}  
         </h2>
 
         <form
@@ -138,9 +145,9 @@ function RecipeDash() {
           <div className="flex justify-center ">
             <button
               type="submit"
-              className="bg-blue-500 text-white py-3 px-5 rounded-lg hover:bg-blue-700 transition duration-100 font-medium shadow-md mt-5 "
+              className="bg-blue-500 text-white py-3 px-5 rounded-lg hover:bg-blue-950 transition duration-100 font-medium shadow-md mt-5 focus:outline-none focus-ring-2 "
             >
-              Submit Recipe
+            {loading ? (<Loading/>) : "Submit Recipe"}      
             </button>
           </div>
         </form>

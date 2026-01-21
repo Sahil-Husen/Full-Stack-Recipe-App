@@ -17,7 +17,7 @@ const verifyToken = async (req, res, next) => {
     const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, secret);
 
-    console.log("decoded:", decoded);
+    // console.log("decoded:", decoded);
 
     // Attach user info to req (not res!)
     req.user = decoded;
